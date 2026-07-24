@@ -1,8 +1,1069 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>James Kenneth A. Tamaca — Electronics Engineer / Embedded &amp; IoT Systems</title>
+<meta name="description" content="Portfolio of James Kenneth A. Tamaca — Electronics Engineering graduate specializing in embedded systems, LoRaWAN/IoT, and data-driven applications.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================
+   TOKENS
+   ============================================ */
+:root{
+  --bg:        #0E1912;
+  --bg-alt:    #142219;
+  --surface:   #1B2B21;
+  --surface-2: #21362A;
+  --line:      rgba(240,237,228,0.10);
+  --line-strong: rgba(240,237,228,0.20);
+  --text:      #F0EDE4;
+  --text-dim:  #A9B8AC;
+  --text-faint:#6E8073;
+  --amber:     #FFB238;
+  --amber-dim: #7A5A22;
+  --teal:      #5EEAD4;
+  --teal-dim:  #2C6158;
+
+  --font-display: 'Space Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+
+  --container: 1120px;
+  --radius: 3px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+
+::selection{background:var(--amber); color:var(--bg);}
+
+a{color:inherit; text-decoration:none;}
+:focus-visible{outline:2px solid var(--amber); outline-offset:3px;}
+
+.wrap{max-width:var(--container); margin:0 auto; padding:0 32px;}
+@media(max-width:640px){.wrap{padding:0 20px;}}
+
+.eyebrow{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--amber);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.eyebrow::before{
+  content:"";
+  width:7px;height:7px;
+  background:var(--amber);
+  border-radius:50%;
+  box-shadow:0 0 0 3px rgba(255,178,56,0.18);
+  flex-shrink:0;
+}
+
+section{position:relative; padding:120px 0;}
+@media(max-width:768px){section{padding:80px 0;}}
+
+.section-head{max-width:640px; margin-bottom:56px;}
+.section-head h2{
+  font-family:var(--font-display);
+  font-size:clamp(28px,4vw,38px);
+  font-weight:700;
+  margin-top:14px;
+  letter-spacing:-0.01em;
+}
+.section-head p{color:var(--text-dim); margin-top:14px; font-size:17px; max-width:52ch;}
+
+.mono{font-family:var(--font-display);}
+
+/* ============================================
+   BACKGROUND TEXTURE — topographic contour lines
+   ============================================ */
+.contour-bg{
+  position:absolute; inset:0;
+  pointer-events:none;
+  opacity:0.35;
+  z-index:0;
+}
+
+/* ============================================
+   NAV
+   ============================================ */
+header{
+  position:fixed; top:0; left:0; right:0;
+  z-index:100;
+  background:rgba(14,25,18,0.82);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  height:64px;
+}
+.nav-id{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:14px;
+  letter-spacing:0.02em;
+}
+.nav-id span{color:var(--amber);}
+.nav-links{display:flex; gap:28px; list-style:none;}
+.nav-links a{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+  transition:color .2s;
+  position:relative;
+  padding:4px 0;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a::after{
+  content:"";
+  position:absolute; left:0; bottom:0;
+  width:0; height:1px; background:var(--amber);
+  transition:width .25s;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-toggle{display:none; background:none; border:none; color:var(--text); font-size:22px; cursor:pointer;}
+@media(max-width:760px){
+  .nav-links{
+    position:fixed; top:64px; left:0; right:0;
+    flex-direction:column; gap:0;
+    background:var(--bg-alt);
+    border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden;
+    transition:max-height .3s ease;
+  }
+  .nav-links.open{max-height:400px;}
+  .nav-links a{display:block; padding:16px 20px; border-top:1px solid var(--line);}
+  .nav-toggle{display:block;}
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero{
+  min-height:100svh;
+  display:flex; flex-direction:column; justify-content:center;
+  padding-top:120px; padding-bottom:80px;
+  position:relative;
+  overflow:hidden;
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.15fr 0.85fr;
+  gap:56px;
+  align-items:center;
+  position:relative; z-index:2;
+}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(34px,5.4vw,60px);
+  line-height:1.06;
+  letter-spacing:-0.01em;
+  margin:18px 0 22px;
+}
+.hero h1 .accent{color:var(--amber);}
+.hero-role{
+  font-size:19px;
+  color:var(--text-dim);
+  max-width:46ch;
+  margin-bottom:34px;
+}
+.hero-role strong{color:var(--text); font-weight:600;}
+
+.btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+.btn{
+  font-family:var(--font-display);
+  font-size:13px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:14px 24px;
+  border-radius:var(--radius);
+  transition:all .2s;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary{
+  background:var(--amber);
+  color:#1A1204;
+  font-weight:700;
+}
+.btn-primary:hover{background:#ffc563; transform:translateY(-1px);}
+.btn-ghost{
+  border:1px solid var(--line-strong);
+  color:var(--text);
+}
+.btn-ghost:hover{border-color:var(--amber); color:var(--amber);}
+
+/* hero portrait */
+.portrait-wrap{display:flex; justify-content:center;}
+.portrait-frame{
+  position:relative;
+  width:100%;
+  max-width:360px;
+  border-radius:8px;
+  overflow:hidden;
+  border:1px solid var(--line-strong);
+  background:var(--surface);
+}
+.portrait-frame::before{
+  content:"";
+  position:absolute; inset:0;
+  border-radius:8px;
+  box-shadow:inset 0 0 0 1px rgba(255,178,56,0.0);
+  pointer-events:none;
+  z-index:2;
+}
+.portrait-img{
+  display:block;
+  width:100%;
+  aspect-ratio:3/4;
+  object-fit:cover;
+  filter:grayscale(0.15) contrast(1.03);
+}
+.portrait-tag{
+  position:absolute; left:14px; right:14px; bottom:14px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(14,25,18,0.72);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:8px 14px;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color:var(--text-dim);
+}
+.portrait-tag .live{color:var(--teal); display:flex; align-items:center; gap:6px;}
+.portrait-tag .live::before{
+  content:"";
+  width:6px;height:6px;border-radius:50%;
+  background:var(--teal);
+  animation:blink 1.8s infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.25;}}
+@media(max-width:900px){.portrait-frame{max-width:280px;}}
+
+/* ============================================
+   ABOUT
+   ============================================ */
+.about-grid{
+  display:grid;
+  grid-template-columns:0.9fr 1.1fr;
+  gap:64px;
+}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr; gap:40px;}}
+.about-copy p{color:var(--text-dim); margin-bottom:18px; font-size:16.5px;}
+.about-copy p strong{color:var(--text); font-weight:600;}
+
+.highlight-list{display:flex; flex-direction:column; gap:0;}
+.highlight-item{
+  display:grid;
+  grid-template-columns:64px 1fr;
+  gap:18px;
+  padding:22px 0;
+  border-top:1px solid var(--line);
+}
+.highlight-item:last-child{border-bottom:1px solid var(--line);}
+.highlight-num{
+  font-family:var(--font-display);
+  color:var(--amber-dim);
+  font-size:13px;
+  padding-top:3px;
+}
+.highlight-item h3{font-size:16px; font-weight:600; margin-bottom:6px;}
+.highlight-item p{color:var(--text-dim); font-size:14.5px;}
+
+/* ============================================
+   SKILLS
+   ============================================ */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+}
+.skill-block{
+  background:var(--bg);
+  padding:28px 26px;
+}
+.skill-block h3{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--teal);
+  margin-bottom:18px;
+}
+.skill-tier{margin-bottom:14px;}
+.skill-tier:last-child{margin-bottom:0;}
+.skill-tier .tier-label{
+  font-size:11px;
+  color:var(--text-faint);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:8px;
+  font-family:var(--font-display);
+}
+.chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+.chip{
+  font-size:13px;
+  padding:6px 11px;
+  border:1px solid var(--line-strong);
+  border-radius:20px;
+  color:var(--text-dim);
+}
+
+/* ============================================
+   THESIS CASE STUDY
+   ============================================ */
+.thesis{
+  background:var(--bg-alt);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.thesis-label{
+  font-family:var(--font-display);
+  font-size:12px;
+  color:var(--text-faint);
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+}
+.thesis-title{
+  font-family:var(--font-display);
+  font-size:clamp(24px,3.6vw,34px);
+  font-weight:700;
+  line-height:1.2;
+  margin:14px 0 20px;
+  max-width:22ch;
+}
+.thesis-partner{
+  display:inline-block;
+  font-size:13px;
+  color:var(--teal);
+  border:1px solid var(--teal-dim);
+  padding:6px 12px;
+  border-radius:20px;
+  margin-bottom:28px;
+}
+.thesis-lede{color:var(--text-dim); max-width:64ch; font-size:16.5px; margin-bottom:48px;}
+
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  margin-bottom:56px;
+}
+@media(max-width:760px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+.stat{
+  background:var(--bg-alt);
+  padding:28px 22px;
+}
+.stat .num{
+  font-family:var(--font-display);
+  font-size:clamp(26px,3vw,34px);
+  font-weight:700;
+  color:var(--amber);
+  line-height:1;
+}
+.stat .desc{
+  margin-top:10px;
+  font-size:13px;
+  color:var(--text-dim);
+  line-height:1.4;
+}
+
+.thesis-detail-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:36px;
+  margin-bottom:56px;
+}
+@media(max-width:800px){.thesis-detail-grid{grid-template-columns:1fr;}}
+.detail-col h4{
+  font-family:var(--font-display);
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--amber);
+  margin-bottom:12px;
+}
+.detail-col ul{list-style:none;}
+.detail-col li{
+  font-size:14.5px;
+  color:var(--text-dim);
+  padding:8px 0;
+  border-top:1px solid var(--line);
+}
+.detail-col li:first-of-type{border-top:none;}
+
+.deploy-map{
+  background:var(--bg);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:32px;
+}
+.deploy-map-head{
+  display:flex; justify-content:space-between; align-items:baseline;
+  margin-bottom:20px; flex-wrap:wrap; gap:10px;
+}
+.deploy-map-head h4{
+  font-family:var(--font-display);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--text-dim);
+}
+.deploy-map-head .tag{font-family:var(--font-display); font-size:12px; color:var(--teal);}
+.deploy-map svg{width:100%; height:auto; display:block;}
+
+/* ============================================
+   PROJECTS (secondary)
+   ============================================ */
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+.project-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:28px;
+  transition:border-color .2s, transform .2s;
+}
+.project-card:hover{border-color:var(--line-strong); transform:translateY(-3px);}
+.project-card .ptag{
+  font-family:var(--font-display);
+  font-size:11px;
+  color:var(--text-faint);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+}
+.project-card h3{font-size:18px; margin:10px 0 10px; font-weight:600;}
+.project-card p{color:var(--text-dim); font-size:14.5px; margin-bottom:16px;}
+.project-card .plink{
+  font-family:var(--font-display);
+  font-size:12.5px;
+  color:var(--amber);
+}
+.project-card.placeholder{
+  display:flex; flex-direction:column; justify-content:center; align-items:flex-start;
+  border-style:dashed;
+  color:var(--text-faint);
+}
+
+/* ============================================
+   CERTIFICATIONS
+   ============================================ */
+.cert-table{width:100%; border-collapse:collapse;}
+.cert-table th{
+  font-family:var(--font-display);
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--text-faint);
+  text-align:left;
+  padding:0 0 14px;
+  border-bottom:1px solid var(--line-strong);
+}
+.cert-table td{
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  font-size:15px;
+  vertical-align:top;
+}
+.cert-table td.cname{color:var(--text); font-weight:600;}
+.cert-table td.cissuer{color:var(--text-dim);}
+.cert-table td.cdate{
+  font-family:var(--font-display);
+  font-size:13px;
+  color:var(--teal);
+  white-space:nowrap;
+}
+@media(max-width:640px){
+  .cert-table thead{display:none;}
+  .cert-table tr{display:block; padding:16px 0; border-bottom:1px solid var(--line);}
+  .cert-table td{display:block; border-bottom:none; padding:2px 0;}
+}
+
+/* ============================================
+   EXPERIENCE (timeline)
+   ============================================ */
+.timeline{position:relative; padding-left:32px;}
+.timeline::before{
+  content:"";
+  position:absolute; left:5px; top:6px; bottom:6px;
+  width:1px;
+  background:linear-gradient(var(--amber), var(--line) 90%);
+}
+.tl-item{position:relative; padding-bottom:44px;}
+.tl-item:last-child{padding-bottom:0;}
+.tl-item::before{
+  content:"";
+  position:absolute; left:-32px; top:5px;
+  width:11px; height:11px; border-radius:50%;
+  background:var(--bg);
+  border:2px solid var(--amber);
+}
+.tl-date{
+  font-family:var(--font-display);
+  font-size:12px;
+  color:var(--text-faint);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:6px;
+}
+.tl-item h3{font-size:18px; font-weight:600; margin-bottom:6px;}
+.tl-org{color:var(--teal); font-size:14px; margin-bottom:10px; font-family:var(--font-display);}
+.tl-item p{color:var(--text-dim); font-size:14.5px; max-width:60ch;}
+
+/* ============================================
+   CONTACT
+   ============================================ */
+.contact{
+  background:var(--bg-alt);
+  border-top:1px solid var(--line);
+}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:start;
+}
+@media(max-width:800px){.contact-grid{grid-template-columns:1fr;}}
+.contact h2{
+  font-family:var(--font-display);
+  font-size:clamp(28px,4vw,42px);
+  line-height:1.15;
+}
+.contact-lede{color:var(--text-dim); margin-top:18px; max-width:44ch; font-size:16.5px;}
+
+.contact-links{display:flex; flex-direction:column;}
+.contact-link{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 0;
+  border-bottom:1px solid var(--line);
+  font-family:var(--font-display);
+  font-size:15px;
+  transition:padding-left .2s, color .2s;
+}
+.contact-link:first-child{border-top:1px solid var(--line);}
+.contact-link:hover{padding-left:8px; color:var(--amber);}
+.contact-link .arrow{color:var(--text-faint); transition:color .2s;}
+.contact-link:hover .arrow{color:var(--amber);}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer{
+  padding:36px 0;
+  border-top:1px solid var(--line);
+}
+.footer-row{
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+  font-family:var(--font-display);
+  font-size:12px;
+  color:var(--text-faint);
+}
+
+/* utility fade-in */
+.reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+.reveal.in{opacity:1; transform:translateY(0);}
+</style>
+</head>
 <body>
-  <h1>James Kenneth A. Tamaca</h1>
-  <p>Electronics Engineering Graduate | Embedded Systems & IoT Developer</p>
-  <p>Welcome to my portfolio! 🚀</p>
+
+<!-- ============================================
+     NAV
+     ============================================ -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="nav-id">JK<span>.</span>TAMACA</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ============================================
+     HERO
+     ============================================ -->
+<section class="hero" id="top">
+  <svg class="contour-bg" viewBox="0 0 1200 800" preserveAspectRatio="none" aria-hidden="true">
+    <g fill="none" stroke="#5EEAD4" stroke-width="1">
+      <path opacity="0.5" d="M-50,120 C 200,60 400,180 650,110 S 1100,140 1250,90"/>
+      <path opacity="0.4" d="M-50,220 C 220,150 420,260 660,200 S 1080,230 1250,180"/>
+      <path opacity="0.3" d="M-50,320 C 250,260 430,340 670,290 S 1060,320 1250,270"/>
+      <path opacity="0.2" d="M-50,420 C 260,370 440,430 680,390 S 1040,410 1250,370"/>
+    </g>
+  </svg>
+
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">San Pablo City, Laguna, PH — Open to Work</div>
+      <h1>James Kenneth<br>A. Tamaca<span class="accent">.</span></h1>
+      <p class="hero-role">
+        Fresh <strong>Electronics Engineering</strong> graduate who builds the layer between
+        physical sensors and useful data — <strong>embedded firmware, LoRaWAN/IoT devices,
+        and the dashboards that make their signal readable.</strong>
+      </p>
+      <div class="btn-row">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+        <a href="#" id="resumeLink" class="btn btn-ghost">Resume ↗</a>
+      </div>
+    </div>
+
+    <div class="portrait-wrap reveal">
+      <div class="portrait-frame">
+        <img src="profile.jpg" alt="Portrait of James Kenneth A. Tamaca" class="portrait-img">
+        <div class="portrait-tag mono">
+          <span class="live">ONLINE</span>
+          <span>San Pablo City, PH</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     ABOUT
+     ============================================ -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div>
+      <div class="eyebrow">About</div>
+      <h2 style="font-family:var(--font-display); font-size:clamp(26px,3.6vw,34px); margin-top:14px;">
+        From breadboard to<br>deployed field hardware.
+      </h2>
+    </div>
+    <div class="about-copy">
+      <p>
+        I'm James, a <strong>2026 Electronics Engineering graduate</strong> based in
+        San Pablo City, Laguna. My work sits at the intersection of embedded hardware,
+        low-power wireless communication, and the software layer that turns raw sensor
+        data into decisions people can act on.
+      </p>
+      <p>
+        That intersection is exactly what my thesis was built on: a
+        <strong>LoRaWAN-enabled per-tree monitoring device</strong>, developed in partnership
+        with <strong>DENR-CENRO Sta. Cruz, Laguna</strong>, that detects forest disturbance
+        in near real time from hundreds of kilometers of unmonitored plantation.
+      </p>
+      <p>
+        Outside the lab, I led the <strong>Association of Future Electronics Engineers</strong>
+        at LSPU-SPCC as President, and spent my internship at the
+        <strong>San Pablo City Engineering Office</strong> applying that same hands-on approach
+        to real infrastructure. I'm currently looking for roles in
+        <strong>software development, AI engineering, and data annotation</strong> — anywhere
+        that values building things that are actually tested in the field, not just in theory.
+      </p>
+
+      <div class="highlight-list" style="margin-top:36px;">
+        <div class="highlight-item">
+          <div class="highlight-num">01</div>
+          <div>
+            <h3>Best Thesis in Electronics Engineering</h3>
+            <p>LoRaWAN-enabled per-tree forest monitoring device, in partnership with DENR-CENRO Sta. Cruz, Laguna.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">02</div>
+          <div>
+            <h3>AFEE President, 2025–2026</h3>
+            <p>Led the Association of Future Electronics Engineers at LSPU-SPCC.</p>
+          </div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-num">03</div>
+          <div>
+            <h3>Electronics Engineering Intern</h3>
+            <p>San Pablo City Engineering Office, February–April 2026.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     SKILLS
+     ============================================ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Skills</div>
+      <h2>What I build with.</h2>
+      <p>Grounded in embedded systems and hardware, extended into the full stack needed to make that hardware's data useful.</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-block">
+        <h3>Programming</h3>
+        <div class="skill-tier">
+          <div class="tier-label">Proficient</div>
+          <div class="chip-row">
+            <span class="chip">C</span><span class="chip">C++</span><span class="chip">Arduino</span>
+          </div>
+        </div>
+        <div class="skill-tier">
+          <div class="tier-label">Intermediate</div>
+          <div class="chip-row">
+            <span class="chip">Python</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span><span class="chip">SQL</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h3>IoT &amp; Embedded</h3>
+        <div class="chip-row">
+          <span class="chip">LoRaWAN</span><span class="chip">LPWAN</span><span class="chip">RAK4631</span>
+          <span class="chip">MPU-6050</span><span class="chip">NEO-M8N GPS</span><span class="chip">I2C</span>
+          <span class="chip">UART</span><span class="chip">SPI</span><span class="chip">Power Management</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h3>Web Development</h3>
+        <div class="chip-row">
+          <span class="chip">Flask</span><span class="chip">PostgreSQL</span><span class="chip">Leaflet</span>
+          <span class="chip">Chart.js</span><span class="chip">REST APIs</span><span class="chip">Full-Stack Dev</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h3>Data &amp; AI</h3>
+        <div class="chip-row">
+          <span class="chip">Data Analytics</span><span class="chip">AI Fundamentals</span>
+          <span class="chip">Prompt Engineering</span><span class="chip">LLM Utilization</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <h3>Tools</h3>
+        <div class="chip-row">
+          <span class="chip">Git</span><span class="chip">Arduino IDE</span><span class="chip">Linux / Bash</span>
+          <span class="chip">TTN Console</span><span class="chip">Google Colab</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     PROJECTS
+     ============================================ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Projects</div>
+      <h2>Selected work.</h2>
+      <p>Two different problems, same approach: figure out what actually needs to be built, then ship it end to end.</p>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="ptag">Web Development</div>
+        <h3>FORGED Youth Website</h3>
+        <p><!-- TODO: replace with a real description — what FORGED Youth is, your role, and the stack you used. --></p>
+        <a href="#" id="forgedProjectLink" class="plink">Visit site →</a>
+      </div>
+      <div class="project-card">
+        <div class="ptag">Embedded / IoT · Thesis</div>
+        <h3>Per-Tree Forest Monitoring Device</h3>
+        <p>LoRaWAN sensor node + Flask/Leaflet dashboard for real-time forest disturbance detection, built with DENR-CENRO Sta. Cruz.</p>
+        <a href="#thesis" class="plink">View case study →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     THESIS CASE STUDY (supporting detail, not the headline)
+     ============================================ -->
+<section id="thesis">
+  <div class="wrap">
+    <div class="thesis-label">Project Detail — Best Thesis, Electronics Engineering</div>
+    <h2 class="thesis-title">A LoRaWAN device that watches one tree at a time.</h2>
+    <div class="thesis-partner">In partnership with DENR-CENRO Sta. Cruz, Laguna</div>
+    <p class="thesis-lede">
+      Full title: <em>Development of a LoRaWAN-Enabled Per-Tree Monitoring Device for
+      Geolocation and Forest Disturbance Detection.</em> Illegal logging and forest
+      disturbance in unmonitored plantations often go undetected until it's too late.
+      This project asked a narrower question: what if each tree could report on its own
+      condition, over kilometers, on a battery that lasts months?
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="num">93.3%</div><div class="desc">disturbance detection accuracy</div></div>
+      <div class="stat"><div class="num">121 days</div><div class="desc">battery life at 8.4 µA deep sleep</div></div>
+      <div class="stat"><div class="num">1.3 km</div><div class="desc">communication range, 93% packet delivery</div></div>
+      <div class="stat"><div class="num">14.7 s</div><div class="desc">average alert latency</div></div>
+    </div>
+
+    <div class="thesis-detail-grid">
+      <div class="detail-col">
+        <h4>Hardware</h4>
+        <ul>
+          <li>RAK4631 LoRa module</li>
+          <li>MPU-6050 accelerometer/gyro</li>
+          <li>NEO-M8N GPS</li>
+          <li>Piezoelectric disturbance sensor</li>
+          <li>LM393 comparator</li>
+        </ul>
+      </div>
+      <div class="detail-col">
+        <h4>Firmware &amp; Comms</h4>
+        <ul>
+          <li>C/C++ on Arduino IDE</li>
+          <li>Adaptive sleep-cycle power management</li>
+          <li>LoRaWAN via RAK7268 gateway</li>
+          <li>The Things Network (TTN) backend</li>
+        </ul>
+      </div>
+      <div class="detail-col">
+        <h4>Dashboard</h4>
+        <ul>
+          <li>Flask application server</li>
+          <li>PostgreSQL for time-series storage</li>
+          <li>Leaflet for live geolocation mapping</li>
+          <li>Chart.js for sensor trend visualization</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="deploy-map">
+      <div class="deploy-map-head">
+        <h4>Field Deployment — DENR-CENRO Plantation Site</h4>
+        <span class="tag">800+ data points logged</span>
+      </div>
+      <svg viewBox="0 0 900 260" aria-hidden="true">
+        <g stroke="#2C6158" stroke-width="1" fill="none" opacity="0.6">
+          <path d="M0,60 C150,20 300,90 450,50 S 750,70 900,30"/>
+          <path d="M0,120 C150,90 320,150 470,110 S 760,130 900,95"/>
+          <path d="M0,190 C160,160 320,210 480,180 S 770,200 900,165"/>
+        </g>
+        <!-- gateway -->
+        <g transform="translate(80,150)">
+          <circle r="9" fill="none" stroke="#FFB238" stroke-width="1.5"/>
+          <circle r="3" fill="#FFB238"/>
+          <text x="16" y="4" fill="#A9B8AC" font-family="Space Mono" font-size="11">RAK7268 GATEWAY</text>
+        </g>
+        <!-- tree nodes scattered, dots represent field data points -->
+        <g fill="#5EEAD4">
+          <circle cx="180" cy="90" r="3"/><circle cx="230" cy="130" r="3"/><circle cx="260" cy="70" r="3"/>
+          <circle cx="300" cy="150" r="3"/><circle cx="330" cy="100" r="3"/><circle cx="360" cy="60" r="3"/>
+          <circle cx="400" cy="140" r="3"/><circle cx="430" cy="90" r="3"/><circle cx="460" cy="170" r="3"/>
+          <circle cx="490" cy="110" r="3"/><circle cx="520" cy="60" r="3"/><circle cx="550" cy="150" r="3"/>
+          <circle cx="580" cy="90" r="3"/><circle cx="610" cy="130" r="3"/><circle cx="640" cy="70" r="3"/>
+          <circle cx="670" cy="160" r="3"/><circle cx="700" cy="100" r="3"/><circle cx="730" cy="50" r="3"/>
+          <circle cx="760" cy="140" r="3"/><circle cx="790" cy="90" r="3"/><circle cx="820" cy="120" r="3"/>
+        </g>
+        <!-- one flagged disturbance -->
+        <g transform="translate(460,170)">
+          <circle r="9" fill="none" stroke="#FFB238" stroke-width="1.5"><animate attributeName="r" values="6;12;6" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/></circle>
+          <circle r="3" fill="#FFB238"/>
+        </g>
+        <text x="620" y="220" fill="#6E8073" font-family="Space Mono" font-size="10">EACH NODE = ONE MONITORED TREE</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CERTIFICATIONS
+     ============================================ -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Certifications</div>
+      <h2>Continuous learning log.</h2>
+    </div>
+    <table class="cert-table">
+      <thead>
+        <tr><th>Certification</th><th>Issuer</th><th>Date</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="cname" data-label="Certification">Introduction to Modern AI</td>
+          <td class="cissuer" data-label="Issuer">Cisco Networking Academy</td>
+          <td class="cdate" data-label="Date">July 2026</td>
+        </tr>
+        <tr>
+          <td class="cname">Introduction to Data Science</td>
+          <td class="cissuer">Cisco Networking Academy</td>
+          <td class="cdate">June 2026</td>
+        </tr>
+        <tr>
+          <td class="cname">Introduction to Cybersecurity</td>
+          <td class="cissuer">Cisco Networking Academy</td>
+          <td class="cdate">May 2026</td>
+        </tr>
+        <tr>
+          <td class="cname">Yeastar Certified Technician</td>
+          <td class="cissuer">Yeastar</td>
+          <td class="cdate">December 2025</td>
+        </tr>
+        <tr>
+          <td class="cname">AWS Solution Architect – Associate</td>
+          <td class="cissuer">Alison</td>
+          <td class="cdate">April 2024</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================
+     EXPERIENCE
+     ============================================ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've applied this.</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-date">Feb — Apr 2026</div>
+        <h3>Electronics Engineering Intern</h3>
+        <div class="tl-org">San Pablo City Engineering Office</div>
+        <p>Applied electronics engineering fundamentals to real municipal infrastructure work, translating classroom theory into field-ready practice.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025 — 2026</div>
+        <h3>President</h3>
+        <div class="tl-org">Association of Future Electronics Engineers (AFEE), LSPU-SPCC</div>
+        <p>Led the university's organization for future electronics engineers, overseeing programs and representing the student body.</p>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2022 — 2026</div>
+        <h3>BS Electronics Engineering</h3>
+        <div class="tl-org">Laguna State Polytechnic University — San Pablo City Campus</div>
+        <p>Graduated 2026. Best Thesis awardee for the DENR-CENRO forest monitoring project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     CONTACT
+     ============================================ -->
+<section id="contact" class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2>Let's build<br>something that<br>gets deployed.</h2>
+      <p class="contact-lede">
+        Open to roles in software development, AI engineering, and data annotation.
+        Based in San Pablo City, Laguna — open to remote and on-site work.
+      </p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:your.email@example.com" class="contact-link" id="emailLink">
+        <span>Email</span><span class="arrow">→</span>
+      </a>
+      <a href="#" class="contact-link" id="githubLink" target="_blank" rel="noopener">
+        <span>GitHub</span><span class="arrow">→</span>
+      </a>
+      <a href="#" class="contact-link" id="linkedinLink" target="_blank" rel="noopener">
+        <span>LinkedIn</span><span class="arrow">→</span>
+      </a>
+      <a href="#" class="contact-link" id="resumeLink2">
+        <span>Resume (PDF)</span><span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 James Kenneth A. Tamaca</span>
+    <span>Built with HTML / CSS / JS — hosted on GitHub Pages</span>
+  </div>
+</footer>
+
+<script>
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+});
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  navLinks.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}));
+
+// Reveal-on-scroll
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && revealEls.length) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.2 });
+  revealEls.forEach(el => io.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add('in'));
+}
+
+// Animated packet along the signal path in the hero telemetry card
+const packet = document.getElementById('packet');
+if (packet && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  let t = 0;
+  function animatePacket(){
+    t += 0.006;
+    const progress = (Math.sin(t) + 1) / 2; // 0..1 ping-pong
+    const x = 10 + progress * 380;
+    packet.setAttribute('cx', x);
+    requestAnimationFrame(animatePacket);
+  }
+  requestAnimationFrame(animatePacket);
+}
+
+/* ============================================
+   EDIT-ME: personal links
+   Fill these in, then delete this comment block.
+   ============================================ */
+document.getElementById('githubLink').href = 'https://github.com/K13ruuu';
+document.getElementById('forgedProjectLink').href = 'https://YOUR-FORGED-YOUTH-LINK.example.com';
+document.getElementById('linkedinLink').href = 'https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE';
+document.getElementById('emailLink').href = 'mailto:YOUR.EMAIL@example.com';
+document.getElementById('resumeLink').href = 'resume.pdf';
+document.getElementById('resumeLink2').href = 'resume.pdf';
+</script>
+
 </body>
 </html>

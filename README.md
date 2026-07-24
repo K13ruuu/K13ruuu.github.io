@@ -24,17 +24,23 @@ Plain HTML, CSS, and JavaScript — no build step, no framework. Everything live
 - No external JS dependencies
 - No backend — the contact section links out to email/GitHub/LinkedIn rather than using a form
 
-## Before you publish: things to fill in
+## Before you publish: things left to fill in
 
-Search `index.html` for the `EDIT-ME` comment near the bottom of the `<script>` tag. Update:
+Contact links and your resume are already wired up (see below). One thing's still a placeholder — search `index.html` for the `EDIT-ME` comment near the bottom of the `<script>` tag:
 
-| What | Where | Current placeholder |
+| What | Where | Status |
 |---|---|---|
-| Email | `emailLink` | `YOUR.EMAIL@example.com` |
-| GitHub profile | `githubLink` | `https://github.com/K13ruuu` (confirm this is correct) |
-| LinkedIn profile | `linkedinLink` | `YOUR-LINKEDIN-HANDLE` |
-| Resume file | `resumeLink`, `resumeLink2` | expects a file named `resume.pdf` in the repo root |
-| FORGED Youth project | `forgedProjectLink` + the project card copy in `#projects` | placeholder link and an empty description — fill in what the site is, your role, and the link |
+| Email | `emailLink` | ✅ set to `james2413tamaca@gmail.com` |
+| GitHub profile | `githubLink` | ✅ set to `https://github.com/K13ruuu` |
+| LinkedIn profile | `linkedinLink` | ✅ set to `https://www.linkedin.com/in/kenneth-tamaca-9854343b6` |
+| Resume file | `resumeLink`, `resumeLink2` | ✅ points to `resume.pdf` — included in this repo |
+| FORGED Youth project | `forgedProjectLink` + the project card copy in `#projects` | ⬜ still a placeholder — fill in what the site is, your role, and the link |
+
+## Resume
+
+`resume.pdf` is included in this repo and already linked from the site's Resume buttons. If you ever swap in an updated resume, keep the filename `resume.pdf` (or update the `href` in the script block to match a new filename).
+
+**Note:** you also sent over a CV file with personal details (date of birth, religion, civil status, references' phone numbers). I didn't publish that one — that kind of personal info isn't something you'd typically want sitting on a public, indexable website. The resume.pdf linked here is the cleaner, job-application-focused version. Let me know if you'd rather use the CV instead, or want a trimmed-down version of it.
 
 To add your resume: drop a PDF named `resume.pdf` in the same folder as `index.html`.
 
